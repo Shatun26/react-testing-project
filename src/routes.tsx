@@ -1,6 +1,5 @@
-import { FC, ReactNode } from 'react';
+import { FC } from 'react';
 import DashboardPage from './pages/DashboardPage';
-import HomePage from './pages/HomePage';
 import SettingsPage from './pages/SettingsPage';
 
 export interface RouteInterface {
@@ -11,7 +10,7 @@ export interface RouteInterface {
 export const ROUTES: RouteInterface[] = [
   {
     path: 'dashboard',
-    Component: HomePage,
+    Component: DashboardPage,
     isPrivate: true,
   },
   {

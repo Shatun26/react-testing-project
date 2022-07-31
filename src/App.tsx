@@ -1,17 +1,17 @@
-import { FC, ReactNode } from 'react';
 import {
   BrowserRouter as Router,
-  Link,
   Navigate,
   Route,
   Routes,
 } from 'react-router-dom';
-import CustomRoute from './components/CustomRoute';
+import ReuiredAuth from './components/ReuiredAuth';
 import MainLayout from './pages/MainLayout';
 import HomePage from './pages/HomePage';
 import { ROUTES } from './routes';
 import './styles/AppStyle.css';
+
 const App = () => {
+  const isAuth = true;
   return (
     <Router>
       <Routes>
@@ -23,7 +23,11 @@ const App = () => {
               key={path}
               path={path}
               element={
-                <CustomRoute isPrivate={isPrivate}>{Component}</CustomRoute>
+                <ReuiredAuth
+                  isPrivate={isPrivate}
+                  isAuth={isAuth}
+                  children={<Component />}
+                />
               }
             />
           ))}
