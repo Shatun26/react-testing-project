@@ -17,6 +17,5 @@ export const StyledPageWrapper = styled.div`
   footer {
     border: 1px solid red;
     height: 100px;
-
   }
 `;

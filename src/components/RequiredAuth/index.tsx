@@ -8,8 +8,9 @@ interface ReuiredAuthProps {
   isPrivate: boolean;
 }
 
-const ReuiredAuth: FC<ReuiredAuthProps> = ({ isPrivate, children, isAuth }) => {
+const RequiredAuth: FC<ReuiredAuthProps> = ({ isPrivate, children, isAuth }) => {
   if (isPrivate) {
+
     if (isAuth) {
       return children;
     } else return <Navigate to='/' replace />;
@@ -18,4 +19,4 @@ const ReuiredAuth: FC<ReuiredAuthProps> = ({ isPrivate, children, isAuth }) => {
   }
 };
 
-export default ReuiredAuth;
+export default RequiredAuth;

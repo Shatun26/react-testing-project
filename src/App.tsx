@@ -4,7 +4,7 @@ import {
   Route,
   Routes,
 } from 'react-router-dom';
-import ReuiredAuth from './components/ReuiredAuth';
+import RequiredAuth from './components/RequiredAuth';
 import MainLayout from './pages/MainLayout';
 import HomePage from './pages/HomePage';
 import { ROUTES } from './routes';
@@ -23,7 +23,7 @@ const App = () => {
               key={path}
               path={path}
               element={
-                <ReuiredAuth
+                <RequiredAuth
                   isPrivate={isPrivate}
                   isAuth={isAuth}
                   children={<Component />}
