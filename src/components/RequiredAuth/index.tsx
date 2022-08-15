@@ -1,6 +1,5 @@
-import { FC, ReactElement, ReactNode } from 'react';
-import { Navigate, Route } from 'react-router-dom';
-import { RouteInterface } from '../../routes';
+import { FC, ReactElement } from 'react';
+import { Navigate } from 'react-router-dom';
 
 interface ReuiredAuthProps {
   isAuth: boolean;
