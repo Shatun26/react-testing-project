@@ -5,12 +5,14 @@ import { StyledPageWrapper } from './style';
 const MainLayout: FC = () => {
   return (
     <StyledPageWrapper>
-      <header>Header</header>
-      <nav>
-        <Link to={'/'}>Home</Link>
-        <Link to={'dashboard'}>Dashboard</Link>
-        <Link to={'settings'}>Settings</Link>
-      </nav>
+      <header>
+        Header
+        <nav>
+          <Link to={'/'}>Home</Link>
+          <Link to={'dashboard'}>Dashboard</Link>
+          <Link to={'settings'}>Settings</Link>
+        </nav>
+      </header>
       <main>
         <Outlet />
       </main>

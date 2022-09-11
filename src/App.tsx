@@ -26,7 +26,7 @@ const App = () => {
                 <RequiredAuth
                   isPrivate={isPrivate}
                   isAuth={isAuth}
-                  children={<Component />}
+                  children={<Component  />}
                 />
               }
             />
