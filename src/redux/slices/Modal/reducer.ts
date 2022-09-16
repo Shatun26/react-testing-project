@@ -23,23 +23,26 @@ const modal = createSlice({
   name: 'Modal',
   initialState,
   reducers: {
-    toggleModal: (
+    openModal: (
       state,
       {
         payload: { contentName, coords },
-      }: { payload: { contentName?: string; coords?: { X: number; Y: number } } }
+      }: {
+        payload: { contentName?: string; coords?: { X: number; Y: number } };
+      }
     ) => {
-      state.isOpen = contentName ? !state.isOpen : false;
       if (coords?.X !== undefined) {
+        state.isOpen = true;
         state.contentStartPosition.X = coords.X;
         state.contentStartPosition.Y = coords.Y;
         if (contentName) state.contentName = contentName;
-      } else {
-        state.contentName = '';
       }
+    },
+    closeModal: (state) => {
+      state.isOpen = false;
     },
   },
 });
 
-export const { toggleModal } = modal.actions;
+export const { closeModal, openModal } = modal.actions;
 export default modal.reducer;

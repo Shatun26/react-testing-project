@@ -66,6 +66,17 @@ export const ModalOutlet = styled.div<{
   left: 0;
   width: 100%;
   height: 100%;
+  
+  &.modal-enter {
+    pointer-events: none;
+  }
+  &.modal-enter-active {
+    pointer-events: all;
+  }
+  &.modal-exit {
+    pointer-events: none;
+  }
+
   animation: ${({ isOpen }) =>
       isOpen ? startAnimationOutlet : endAnimationOutlet}
     ${({ animationDuration }) => animationDuration}ms forwards;
@@ -76,8 +87,11 @@ export const ModalContent = styled.div<{
   startPosition: any;
   isOpen: boolean;
 }>`
+  background-color: white;
+  border: 1px solid red;
   position: absolute;
   transform: translate(-50%, -50%) scale(0.2);
+
   animation: ${({ startPosition, isOpen }) =>
       startMoveContent(startPosition, isOpen)}
     ${({ animationDuration }) => animationDuration}ms forwards;

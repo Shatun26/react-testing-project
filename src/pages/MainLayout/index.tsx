@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { Link, Outlet } from 'react-router-dom';
 import Modal from '../../components/Modal';
 import { useModal } from '../../hooks/useModal';
-import { toggleModal } from '../../redux/slices/Modal/reducer';
+import { openModal } from '../../redux/slices/Modal/reducer';
 
 const MainLayout: FC = () => {
   const toggleModal = useModal();

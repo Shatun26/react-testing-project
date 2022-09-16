@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { toggleModal } from '../../redux/slices/Modal/reducer';
+import { openModal } from '../../redux/slices/Modal/reducer';
 import { modalStatusSelector } from '../../redux/slices/Modal/selectors';
 
 export const useModal = () => {
@@ -14,7 +14,7 @@ export const useModal = () => {
 
     if (contentName || isOpen) {
       dispatch(
-        toggleModal({
+        openModal({
           coords: { X: coordX, Y: coordY },
           contentName: contentName,
         })
