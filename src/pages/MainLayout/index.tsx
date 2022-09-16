@@ -1,18 +1,16 @@
 import { FC } from 'react';
-import { useDispatch } from 'react-redux';
 import { Link, Outlet } from 'react-router-dom';
 import Modal from '../../components/Modal';
 import { useModal } from '../../hooks/useModal';
-import { openModal } from '../../redux/slices/Modal/reducer';
 
 const MainLayout: FC = () => {
-  const toggleModal = useModal();
+  const { openModal } = useModal();
 
   return (
     <>
       <header>
         Header
-        <button onClick={(e) => toggleModal(e, 'signIn')}>
+        <button onClick={(e) => openModal(e, 'signIn')}>
           Open/Close Modal
         </button>
         <nav>
@@ -22,12 +20,16 @@ const MainLayout: FC = () => {
         </nav>
       </header>
       <main>
-        <button onClick={(e) => toggleModal(e, 'signUp')}>Open/Close Modal</button>
+        <button onClick={(e) => openModal(e, 'signUp')}>
+          Open/Close Modal
+        </button>
 
         <Outlet />
       </main>
-      <Modal  />
-      <button onClick={toggleModal}>Open/Close Modal</button>
+      <Modal />
+      <button onClick={(e) => openModal(e, 'securityCode')}>
+        Open/Close Modal
+      </button>
 
       <footer>Footer</footer>
     </>

@@ -8,14 +8,14 @@ const startAnimationOutlet = keyframes`
 
   to {
     background-color: rgba(0,0,0,0.5);
-    backdrop-filter: blur(1px);
+    backdrop-filter: blur(2px);
   }
 `;
 
 const endAnimationOutlet = keyframes`
   from {
     background-color: rgba(0,0,0,0.5);
-    backdrop-filter: blur(1px);
+    backdrop-filter: blur(2px);
   }
 
   to {
@@ -29,8 +29,8 @@ const startMoveContent = (position: any, isOpen: boolean) => keyframes`
  ${
    isOpen
      ? `from{
-    opacity: 0;
-    transform: translate(-50%, -50%) scale(0.2);
+    opacity: 0.2;
+    transform: translate(-50%, -50%) scale(0.5);
     top: ${position.Y}px;
     left: ${position.X}px;
       }
@@ -48,8 +48,8 @@ const startMoveContent = (position: any, isOpen: boolean) => keyframes`
     left: 50%
       }
       to{
-    opacity: 0;
-    transform: translate(-50%, -50%) scale(0.2);
+    opacity: 0.2;
+    transform: translate(-50%, -50%) scale(0.5);
     top: ${position.Y}px;
     left: ${position.X}px;
     }
@@ -60,23 +60,15 @@ const startMoveContent = (position: any, isOpen: boolean) => keyframes`
 export const ModalOutlet = styled.div<{
   isOpen: boolean;
   animationDuration?: number;
+  touchNone: boolean;
 }>`
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  
-  &.modal-enter {
-    pointer-events: none;
-  }
-  &.modal-enter-active {
-    pointer-events: all;
-  }
-  &.modal-exit {
-    pointer-events: none;
-  }
-
+  pointer-events: ${({ touchNone }) => (touchNone ? 'none' : ' all')};
+  touch-action: ${({ touchNone }) => (touchNone ? 'none' : ' auto')};
   animation: ${({ isOpen }) =>
       isOpen ? startAnimationOutlet : endAnimationOutlet}
     ${({ animationDuration }) => animationDuration}ms forwards;

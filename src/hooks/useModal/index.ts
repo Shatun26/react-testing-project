@@ -1,24 +1,21 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { openModal } from '../../redux/slices/Modal/reducer';
-import { modalStatusSelector } from '../../redux/slices/Modal/selectors';
+import { useDispatch } from 'react-redux';
+import { openModal as openModalReducer } from '../../redux/slices/Modal/reducer';
 
 export const useModal = () => {
   const dispatch = useDispatch();
-  const isOpen = useSelector(modalStatusSelector);
 
-  return (e: any, contentName?: string) => {
+  const openModal = (e: any, contentName: string) => {
     const coordX =
       e.target.offsetLeft + e.target.offsetWidth / 2 - window.pageXOffset;
     const coordY =
       e.target.offsetTop + e.target.offsetHeight / 2 - window.pageYOffset;
 
-    if (contentName || isOpen) {
-      dispatch(
-        openModal({
-          coords: { X: coordX, Y: coordY },
-          contentName: contentName,
-        })
-      );
-    }
+    dispatch(
+      openModalReducer({
+        coords: { X: coordX, Y: coordY },
+        contentName: contentName,
+      })
+    );
   };
+  return { openModal };
 };

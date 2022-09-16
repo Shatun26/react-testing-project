@@ -1,4 +1,4 @@
-import { FC, useMemo, useEffect, useState, useRef } from 'react';
+import { FC, useMemo, useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { closeModal } from '../../redux/slices/Modal/reducer';
@@ -8,43 +8,57 @@ import * as S from './style';
 interface ModalProps {
   animationDuration?: number;
 }
-const modalContent: Record<string, any> = {
-  signUp: 'signUp',
-  signIn: 'signIn',
-  securityCode: 'securityCode',
-  stripe: 'stripe',
-};
-const Modal: FC<ModalProps> = ({ animationDuration = 200 }) => {
+
+const Modal: FC<ModalProps> = ({ animationDuration = 400 }) => {
   const dispatch = useDispatch();
-  const modalSel = useSelector(modalSelector);
-  const { isOpen, contentName, contentStartPosition } = modalSel;
+  const { isOpen, contentName, contentStartPosition } =
+    useSelector(modalSelector);
   const [isOpenState, setIsOpenState] = useState(false);
-  const [modalClass, setModalClass] = useState('');
+  const [moving, setIsMomoving] = useState(false);
+
+  const body = document.querySelector('body') as HTMLElement;
+  const root = document.getElementById('root') as HTMLElement;
+
   const element = useMemo(() => {
     const element = document.createElement('div');
     element.classList.add('modal');
     return element;
   }, []);
-  const body = document.querySelector('body') as HTMLElement;
-  const root = document.getElementById('root') as HTMLElement;
+
+  const modalContent: Record<string, any> = {
+    signUp: 'signUp',
+    signIn: (
+      <div>
+        <p>123</p>
+        <input type='text' placeholder='123123123' />
+        <input type='text' placeholder='123123123' />
+        <input type='text' placeholder='123123123' />
+        <input type='text' placeholder='123123123' />
+        <input type='text' placeholder='123123123' />
+      </div>
+    ),
+    securityCode: 'securityCode',
+    stripe: 'stripe',
+  };
 
   useEffect(() => {
     if (isOpen) {
       body.style.overflow = 'hidden';
       root.style.pointerEvents = 'none';
+      root.style.touchAction = 'none';
       setIsOpenState(true);
-      setModalClass('enter');
+      setIsMomoving(true);
       const timeout = setTimeout(() => {
-        setModalClass('enter-active');
+        setIsMomoving(false);
       }, animationDuration);
       return () => {
         clearTimeout(timeout);
       };
     } else {
-      body.style.overflow = '';
-      root.style.pointerEvents = '';
-      setModalClass('exit');
+      setIsMomoving(true);
       const timeout = setTimeout(() => {
+        root.removeAttribute('style');
+        body.removeAttribute('style');
         setIsOpenState(false);
       }, animationDuration);
       return () => {
@@ -63,7 +77,7 @@ const Modal: FC<ModalProps> = ({ animationDuration = 200 }) => {
   if (isOpenState) {
     return createPortal(
       <S.ModalOutlet
-        className={`modal-${modalClass}`}
+        touchNone={moving}
         animationDuration={animationDuration}
         isOpen={isOpen}
         onClick={(e) => {

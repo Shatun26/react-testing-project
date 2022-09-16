@@ -31,11 +31,11 @@ const modal = createSlice({
         payload: { contentName?: string; coords?: { X: number; Y: number } };
       }
     ) => {
-      if (coords?.X !== undefined) {
+      if (contentName) state.contentName = contentName;
+      if (!!coords?.X) {
         state.isOpen = true;
         state.contentStartPosition.X = coords.X;
         state.contentStartPosition.Y = coords.Y;
-        if (contentName) state.contentName = contentName;
       }
     },
     closeModal: (state) => {
